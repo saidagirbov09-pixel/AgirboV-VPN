@@ -1,0 +1,309 @@
+{
+  "outbounds" : [
+    {
+      "streamSettings" : {
+        "realitySettings" : {
+          "shortId" : "50",
+          "serverName" : "tradingview.com",
+          "spiderX" : "\/",
+          "fingerprint" : "qq",
+          "publicKey" : "-tePObR3oZwGAUOb5kqTYkNWl6rtUKl0RFuzuu06wgw",
+          "password" : "-tePObR3oZwGAUOb5kqTYkNWl6rtUKl0RFuzuu06wgw",
+          "show" : false
+        },
+        "network" : "tcp",
+        "security" : "reality"
+      },
+      "protocol" : "vless",
+      "tag" : "proxy",
+      "settings" : {
+        "vnext" : [
+          {
+            "port" : 443,
+            "address" : "test.grey-lance.test-cdn-kkk.com",
+            "users" : [
+              {
+                "encryption" : "none",
+                "level" : 8,
+                "flow" : "xtls-rprx-vision",
+                "id" : "cb8e60fe-a7ce-4139-be7f-619c6d81e9c9"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tag" : "direct",
+      "protocol" : "freedom",
+      "settings" : {
+        "ipsBlocked" : [
+
+        ]
+      }
+    },
+    {
+      "tag" : "block",
+      "protocol" : "blackhole"
+    },
+    {
+      "protocol" : "dns",
+      "tag" : "dns-out"
+    }
+  ],
+  "routing" : {
+    "domainStrategy" : "AsIs",
+    "rules" : [
+      {
+        "port" : "53",
+        "outboundTag" : "dns-out",
+        "type" : "field"
+      },
+      {
+        "type" : "field",
+        "ip" : [
+          "198.18.0.2",
+          "10.0.0.2"
+        ],
+        "outboundTag" : "dns-out"
+      },
+      {
+        "type" : "field",
+        "network" : "tcp",
+        "port" : "853",
+        "outboundTag" : "proxy"
+      },
+      {
+        "inboundTag" : [
+          "wg_bootstrap_dns"
+        ],
+        "outboundTag" : "direct",
+        "type" : "field"
+      },
+      {
+        "inboundTag" : [
+          "dns"
+        ],
+        "outboundTag" : "proxy",
+        "type" : "field"
+      },
+      {
+        "type" : "field",
+        "inboundTag" : [
+          "domestic_dns"
+        ],
+        "outboundTag" : "direct"
+      }
+    ]
+  },
+  "dns" : {
+    "servers" : [
+      "1.1.1.1",
+      "8.8.8.8"
+    ],
+    "queryStrategy" : "UseIPv4",
+    "tag" : "dns"
+  },
+  "log" : {
+    "error" : "\/private\/var\/mobile\/Containers\/Shared\/AppGroup\/7C820739-1E42-449D-8C78-F9A48A062190\/logs\/xray.log",
+    "access" : "none",
+    "loglevel" : "none"
+  },
+  "inbounds" : [
+    {
+      "protocol" : "mixed",
+      "port" : 10808,
+      "settings" : {
+        "udp" : true,
+        "auth" : "noauth"
+      },
+      "sniffing" : {
+        "enabled" : true,
+        "routeOnly" : true,
+        "destOverride" : [
+          "http",
+          "tls",
+          "quic",
+          "fakedns"
+        ]
+      },
+      "listen" : "127.0.0.1",
+      "tag" : "in-1oek3q"
+    }
+  ],
+  "policy" : {
+    "levels" : {
+      "8" : {
+        "connIdle" : 300,
+        "statsUserDownlink" : false,
+        "statsUserOnline" : false,
+        "downlinkOnly" : 4,
+        "bufferSize" : 3,
+        "statsUserUplink" : false,
+        "handshake" : 3,
+        "uplinkOnly" : 2
+      }
+    },
+    "system" : {
+      "statsInboundUplink" : false,
+      "statsOutboundDownlink" : false,
+      "statsOutboundUplink" : false,
+      "statsInboundDownlink" : false
+    }
+  }
+}
+
+{
+  "inbounds" : [
+    {
+      "protocol" : "mixed",
+      "settings" : {
+        "auth" : "noauth",
+        "udp" : true
+      },
+      "tag" : "in-f2k6r9",
+      "port" : 10808,
+      "listen" : "127.0.0.1",
+      "sniffing" : {
+        "routeOnly" : true,
+        "destOverride" : [
+          "http",
+          "tls",
+          "quic",
+          "fakedns"
+        ],
+        "enabled" : true
+      }
+    }
+  ],
+  "dns" : {
+    "tag" : "dns",
+    "servers" : [
+      "1.1.1.1",
+      "8.8.8.8"
+    ],
+    "queryStrategy" : "UseIPv4"
+  },
+  "log" : {
+    "loglevel" : "none",
+    "access" : "none",
+    "error" : "\/private\/var\/mobile\/Containers\/Shared\/AppGroup\/7C820739-1E42-449D-8C78-F9A48A062190\/logs\/xray.log"
+  },
+  "outbounds" : [
+    {
+      "protocol" : "vless",
+      "tag" : "proxy",
+      "streamSettings" : {
+        "network" : "tcp",
+        "security" : "reality",
+        "realitySettings" : {
+          "fingerprint" : "qq",
+          "serverName" : "tradingview.com",
+          "show" : false,
+          "shortId" : "50",
+          "spiderX" : "\/",
+          "publicKey" : "-tePObR3oZwGAUOb5kqTYkNWl6rtUKl0RFuzuu06wgw",
+          "password" : "-tePObR3oZwGAUOb5kqTYkNWl6rtUKl0RFuzuu06wgw"
+        }
+      },
+      "settings" : {
+        "vnext" : [
+          {
+            "port" : 443,
+            "users" : [
+              {
+                "encryption" : "none",
+                "id" : "cb8e60fe-a7ce-4139-be7f-619c6d81e9c9",
+                "level" : 8,
+                "flow" : "xtls-rprx-vision"
+              }
+            ],
+            "address" : "test.vast-mesa.test-cdn-kkk.com"
+          }
+        ]
+      }
+    },
+    {
+      "tag" : "direct",
+      "settings" : {
+        "ipsBlocked" : [
+
+        ]
+      },
+      "protocol" : "freedom"
+    },
+    {
+      "protocol" : "blackhole",
+      "tag" : "block"
+    },
+    {
+      "protocol" : "dns",
+      "tag" : "dns-out"
+    }
+  ],
+  "routing" : {
+    "rules" : [
+      {
+        "port" : "53",
+        "outboundTag" : "dns-out",
+        "type" : "field"
+      },
+      {
+        "ip" : [
+          "198.18.0.2",
+          "10.0.0.2"
+        ],
+        "type" : "field",
+        "outboundTag" : "dns-out"
+      },
+      {
+        "network" : "tcp",
+        "outboundTag" : "proxy",
+        "port" : "853",
+        "type" : "field"
+      },
+      {
+        "inboundTag" : [
+          "wg_bootstrap_dns"
+        ],
+        "type" : "field",
+        "outboundTag" : "direct"
+      },
+      {
+        "type" : "field",
+        "inboundTag" : [
+          "dns"
+        ],
+        "outboundTag" : "proxy"
+      },
+      {
+        "inboundTag" : [
+          "domestic_dns"
+        ],
+        "type" : "field",
+        "outboundTag" : "direct"
+      }
+    ],
+    "domainStrategy" : "AsIs"
+  },
+  "policy" : {
+    "system" : {
+      "statsOutboundDownlink" : false,
+      "statsOutboundUplink" : false,
+      "statsInboundUplink" : false,
+      "statsInboundDownlink" : false
+    },
+    "levels" : {
+      "8" : {
+        "statsUserUplink" : false,
+        "connIdle" : 300,
+        "uplinkOnly" : 2,
+        "statsUserOnline" : false,
+        "downlinkOnly" : 4,
+        "handshake" : 3,
+        "bufferSize" : 3,
+        "statsUserDownlink" : false
+      }
+    }
+  }
+}
